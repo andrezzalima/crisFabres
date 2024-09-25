@@ -1,11 +1,12 @@
 "use client";
 
 import './globals.css';
+import Image from 'next/image';
 import Carousel from './carrossel';
+import About from './about';
 import { Montserrat, Playfair_Display } from 'next/font/google';
-
 import { useState, useEffect } from 'react';
-import { FaInstagram } from 'react-icons/fa';
+import { FaInstagram, FaTiktok, FaYoutube, FaPinterest } from 'react-icons/fa';
 import { IoMenuOutline } from "react-icons/io5";
 import { FaRegCopyright } from "react-icons/fa6";
 
@@ -19,13 +20,25 @@ const montserrat = Montserrat({
   subsets: ['latin'],
 });
 
+// Links de redes sociais
+const socialLinks = [
+  { name: "Instagram", url: "https://www.instagram.com/cristianefabres/", icon: <FaInstagram className="text-3xl" /> },
+  { name: "TikTok", url: "https://www.tiktok.com/@cristianefabres", icon: <FaTiktok className="text-3xl" /> },
+  { name: "YouTube", url: "https://www.youtube.com/@cristianefabres", icon: <FaYoutube className="text-3xl" /> },
+  { name: "Pinterest", url: "https://pin.it/6uwlliz0K", icon: <FaPinterest className="text-3xl" /> },
+];
+
 export default function Home() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [expanded, setExpanded] = useState(false);
+  const [expandedShein, setExpandedShein] = useState(false);
+  const [expandedAmazon, setExpandedAmazon] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  
 
+  // Função de envio de mensagem
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = { name, email, message };
@@ -50,174 +63,272 @@ export default function Home() {
     }
   };
 
-  const toggleExpand = () => setExpanded(!expanded);
+  // Controla a abertura do menu
+  const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
+
+  // Fecha o menu em telas grandes
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 1024);
+      if (window.innerWidth >= 1024) {
+        setIsMenuOpen(false);
+      }
+    };
+    handleResize(); // Set initial value
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Links de produtos
+  const sheinLinks = [
+    'https://shein.top/7q8povw',
+    'https://shein.top/6wh1h3o',
+    'https://shein.top/52bgmlg',
+    'https://shein.top/pa00aq8',
+    'https://shein.top/iugrpey',
+    'https://shein.top/q3roh2w',
+    'https://shein.top/g38ium6',
+  ];
+
+  const amazonLinks = [
+    'https://amzn.to/3XDVIm0',
+    'https://amzn.to/3XEw8NG',
+    'https://amzn.to/4ekE9Nc',
+    'https://amzn.to/3MHFm5I',
+    'https://amzn.to/3ASkaHh',
+    'https://amzn.to/4ekEteS',
+    'https://amzn.to/3ASkh5F',
+    'https://amzn.to/3MHeUJc',
+    'https://amzn.to/3XdXade',
+    'https://amzn.to/3AWuheh',
+    'https://amzn.to/4eeNs1c',
+  ];
 
   return (
-    <section className={`bg-light-beige ${montserrat.className}`}>
+    <section className={` ${montserrat.className} min-h-screen`}>
       <header>
-        {/* Botão do menu hambúrguer */}
-        <div className="fixed top-5 left-5 md:left-auto z-10 w-2/3">
-          <div className="flex flex-col justify-center md:flex-row md:px-10 px-5">
-            <button
-              className="md:hidden block z-50"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-            >
-              <IoMenuOutline
-                className={`text-3xl md:text-6xl ${isMenuOpen ? "text-light-beige" : "text-dark-beige"}`}
-              />
+        <div className={`fixed top-0 left-0 z-10 w-full bg-rose sm:min-h-16 min-h-14 flex items-center ${isMobile ? "justify-end" : "justify-center"}  text-light-beige`}>
+
+          <div className="flex flex-col sm:flex-row sm:px-10 px-5">
+            <button className="sm:hidden block z-50" onClick={toggleMenu}>
+              <IoMenuOutline className={`text-3xl sm:text-6xl ${isMenuOpen ? "text-light-beige" : "text-dark-brown"}`} />
             </button>
 
-            {/* Menu */}
-            <div
-              className={`${isMenuOpen && window.innerWidth < 768
-                ? "flex w-full h-screen fixed top-0 left-0 gap-5 bg-dark-beige flex-col justify-center items-center z-20"
-                : "hidden md:flex flex-col md:flex-row md:justify-between md:items-center gap-20 text-sm uppercase z-20"
-                }`}
-            >
-              {["Sobre mim", "Projetos", "Cursos", "Contato"].map((item, index) => (
-                <a
-                  key={index}
-                  href=""
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className="hover:text-dark-rose transition-all duration-300"
-                >
-                  {item}
-                </a>
-              ))}
-            </div>
+            <nav className={`${isMenuOpen && window.innerWidth < 1024
+              ? "flex w-full h-screen fixed top-0 left-0 gap-5 bg-dark-beige text-dark-brown flex-col justify-center items-center z-20"
+              : "hidden sm:flex flex-col sm:flex-row sm:justify-center sm:items-center gap-20 text-sm uppercase z-20"
+              }`}>
+              {["Sobre mim", "Cursos", "Produtos", "Contato"].map((item, index) => {
+                const ids = ["about", "projects", "courses", "contact"];
+                return (
+                  <a
+                    key={index}
+                    href={`#${ids[index]}`}
+                    onClick={toggleMenu}
+                    className="hover:text-dark-brown transition-all duration-300"
+                  >
+                    {item}
+                  </a>
+                );
+              })}
+            </nav>
           </div>
         </div>
       </header>
 
-      {/* Carrossel - Banners */}
-      <div className="mb-14">
-        <Carousel />
+      {/* carrossel */}
+      <Carousel />
+
+      {/* div social media */}
+      <div className="flex justify-evenly mb-4 space-x-6 bg-dark-brown p-10 text-rose">
+        {socialLinks.map((link, index) => (
+          <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-dark-rose transition-all duration-300 ">
+            {link.icon}
+          </a>
+        ))}
       </div>
 
-      {/* Seção "Quem é Cristiane Fabres?" */}
-      <div id="about" className="flex flex-col items-end mb-14">
-        <img src="/images/img7.jpg" alt="Cristiane Fabres" className="absolute z-0" />
-        <img src="/images/logo2.png" alt="Cristiane Fabres" className="absolute top-0 left-20 w-3/5 z-10 mt-7" />
-        <h1 className={`z-20 ${playfairDisplay.className} text-3xl font-semibold text-center pr-3 mb-5 pt-2`}>
-          Quem é Cristiane Fabres?
-        </h1>
-        <div className={`z-20 flex flex-col items-end  mt-44 ${expanded ? 'max-h-full' : 'max-h-80 overflow-hidden'}`}>
-          <p className='w-full md:w-1/2 bg-rose text-dark-brown p-5 rounded-t-lg'>
-            Sou Cris Fabres, uma apaixonada por tecnologia, marketing digital e o poder de transformar vidas através do conhecimento.
+      {/* sobre mim */}
+      <About />
+
+      {/* div e-books e curso */}
+      <div className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-24">
+        {/* Div 1 - Curso */}
+        <div id="curso" className="bg-dark-brown text-light-beige p-6 md:p-12 flex flex-col items-center min-h-full w-full md:w-1/2">
+          <h2 className={`text-3xl font-bold mb-6 text-center`}>DMA Dólar <br /> Master Academy</h2>
+          <p className="text-lg text-center mb-6">
+            Essa é a sua oportunidade de começar a ganhar dinheiro com a internet graças ao método que mais de 23 mil alunos aplicaram e mudaram de vida!
           </p>
-          <p className=' bg-rose text-dark-brown p-5 rounded-b-lg '>
-            Sou psicóloga de formação, mas foi no universo digital que encontrei minha verdadeira missão: ajudar pessoas a descobrir e alcançar todo o seu potencial no mundo online.
+          <a
+            href="https://go.hotmart.com/O94850532U"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="bg-dark-rose text-light-beige py-2 px-4 rounded transition-colors hover:bg-light-brown"
+          >
+            Conheça o Curso
+          </a>
+        </div>
 
-            Desde 2014, venho construindo minha jornada como criadora de conteúdo, unindo minhas duas grandes paixões: o comportamento humano e a tecnologia. Ao longo dos anos, tive o privilégio de trabalhar com grandes marcas e de impactar milhares de pessoas com dicas, inspirações e estratégias que realmente fazem a diferença.<br></br>
+        {/* Div 2 - Ebook */}
+        <div className="flex flex-col items-center justify-between h-full w-full md:w-1/2 bg-rose">
+          <h2 className={`text-lg font-semibold text-center mt-8 md:mt-12 md:text-5xl md:mb-4`}>
+            Clique aqui para fazer <br /> o download do e-book:
+          </h2>
+          <a
+            href="DMA-mulherestecnologia.pdf"
+            download
+            id='ebook'
+            className="transform transition-transform duration-300 hover:scale-105 mt-4"
+          >
+            <img
+              src="/images/DMACris.png"
+              alt="DMA-Cris"
+              className="w-full max-w-md h-auto shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 mb-4"
+              style={{ objectFit: 'cover' }}
+            />
+          </a>
+        </div>
+      </div>
 
-            Hoje, além de ser co-criadora do Dólar Master Academy (DMA), um projeto que nasceu do desejo de compartilhar conhecimento prático e acessível, também sou a idealizadora do “Mulheres e Tecnologia”, uma iniciativa que empodera mulheres a explorar e dominar o mundo digital. <br></br>
-
-            Moro em Portugal há 5 anos, onde construí uma vida repleta de desafios e conquistas ao lado do Gab e dos nossos três adoráveis gatinhos, Amora, Cookie e Brownie. Aqui é onde me sinto em casa, e é daqui que eu compartilho com o mundo a minha paixão por ajudar pessoas a transformarem suas vidas. <br></br>
-
-            Acredito que cada uma de nós tem o poder de conquistar grandes coisas. Estou aqui para te guiar, apoiar e inspirar nessa jornada digital.
-
-            <p className={`${playfairDisplay.className}`}>Vamos prosperar juntas?</p>
+      {/* Produtos */}
+      <div className="container mb-14">
+        {/* Introdução aos Produtos */}
+        <div className="text-center mb-8 p-10 w-screen bg-medium-brown text-light-beige">
+          <h2 className={`text-2xl md:text-4xl font-bold mb-10 ${playfairDisplay.className} text-center`}>
+            Produtos que eu indico:
+          </h2>
+          <p className="text-base md:text-lg">
+            Todos os produtos abaixo foram cuidadosamente escolhidos por mim e são opções que acredito que irão melhorar sua experiência no dia a dia. Ao clicar em qualquer um dos links, você será redirecionado para uma página externa. Aproveite as recomendações e boas compras!
           </p>
         </div>
-        <button onClick={toggleExpand} className="mt-4 mx-auto block px-4 py-2 text-white rounded-lg hover:bg-dark-beige transition-colors">
-          {expanded ? 'Ver menos' : 'Ver mais'}
-        </button>
-
-      </div>
-
-      {/* Seção de cursos */}
-      <div className="mb-14">
-        <h1 className={`${playfairDisplay.className} text-center text-4xl text-dark-brown mb-10`}>Cursos</h1>
-        <div className="flex flex-wrap justify-around p-5">
-          {[1, 2, 3].map((course) => (
-            <div key={course} className="course-item w-full md:w-1/3 p-2 transform transition duration-300 hover:scale-105 hover:shadow-lg">
-              <a href={`link-para-curso-${course}`}>
-                <img src={`/images/curso${course}.jpg`} alt={`Curso ${course}`} className="w-full h-auto rounded-lg" />
+        {/* Seção de Produtos - Shein */}
+        <div className="text-dark-brown mb-14">
+          <h3 className={`text-3xl font-semibold mb-8 text-center`}>
+            Shein:
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 px-4">
+            {sheinLinks.slice(0, expandedShein ? sheinLinks.length : 4).map((link, index) => (
+              <a
+                key={index}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transform transition-transform hover:scale-105 hover:shadow-lg bg-white p-4 rounded-lg shadow-md"
+              >
+                <Image
+                  src={`/images/shein${index + 1}.jpg`}
+                  alt={`Produto Shein ${index + 1}`}
+                  width={300}
+                  height={300}
+                  className="object-cover w-full h-auto rounded-lg"
+                />
               </a>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Seção de produtos */}
-      <div className='bg-light-brown py-10'>
-        <div id="product-section" className={`mb-14 overflow-hidden transition-all duration-300 ease-in-out ${expanded ? 'max-h-full' : 'max-h-32'}`}>
-          <h1 className={`${playfairDisplay.className} text-center text-2xl font-semibold text-dark-brown mb-10`}>Produtos</h1>
-          <div className="flex flex-wrap justify-around p-5">
-            {[1, 2, 3, 4].map((product) => (
-              <div key={product} className="product-item w-full md:w-1/4 p-2 transform transition duration-300 hover:scale-105 hover:shadow-lg">
-                <img src={`/images/produto${product}.jpg`} alt={`Produto ${product}`} className="w-full h-auto rounded-lg" />
-              </div>
             ))}
           </div>
-        </div>
-        <button onClick={toggleExpand} className="mt-4 mx-auto block px-4 py-2 text-white rounded-lg hover:bg-dark-beige transition-colors">
-          {expanded ? 'Ver menos' : 'Ver mais'}
-        </button>
-      </div>
-
-
-      {/* Redes sociais */}
-      <div className="mb-14">
-        <h1 className={`${playfairDisplay.className} text-center text-2xl font-semibold text-dark-brown mb-10`}>Redes Sociais</h1>
-        <div className="flex flex-col items-center space-y-4">
-          {["Marketing", "Blogger"].map((social, index) => (
-            <div key={index} className="flex items-center space-x-2 text-dark-brown">
-              <FaInstagram className="text-2xl" />
-              <p>{social}</p>
+          {sheinLinks.length > 4 && (
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setExpandedShein(!expandedShein)}
+                className="text-dark-rose font-medium py-2 px-4 border border-dark-rose rounded-lg hover:bg-medium-brown hover:text-white transition-colors"
+              >
+                {expandedShein ? 'Mostrar menos' : 'Mostrar mais'}
+              </button>
             </div>
-          ))}
+          )}
+        </div>
+
+        {/* Seção de Produtos - Amazon */}
+        <div className="text-dark-brown">
+          <h3 className={`text-3xl font-semibold mb-8 text-center`}>
+            Amazon:
+          </h3>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-8 px-4">
+            {amazonLinks.slice(0, expandedAmazon ? amazonLinks.length : 4).map((link, index) => (
+              <a
+                key={index}
+                href={link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block transform transition-transform hover:scale-105 hover:shadow-lg bg-white p-4 rounded-lg shadow-md"
+              >
+                <Image
+                  src={`/images/amazon${index + 1}.jpg`}
+                  alt={`Produto Amazon ${index + 1}`}
+                  width={300}
+                  height={300}
+                  className="object-cover w-full h-auto rounded-lg"
+                />
+              </a>
+            ))}
+          </div>
+          {amazonLinks.length > 4 && (
+            <div className="text-center mt-6">
+              <button
+                onClick={() => setExpandedAmazon(!expandedAmazon)}
+                className="text-dark-rose font-medium py-2 px-4 border border-dark-rose rounded-lg hover:bg-medium-brown hover:text-white transition-colors"
+              >
+                {expandedAmazon ? 'Mostrar menos' : 'Mostrar mais'}
+              </button>
+            </div>
+          )}
         </div>
       </div>
-      {/* Formulário de contato */}
-      <div id="contact" className="bg-light-beige py-12 px-6 md:px-12 lg:px-24 rounded-lg shadow-lg mt-12">
-        <h2 className={`${playfairDisplay.className} text-2xl font-semibold text-dark-brown text-center mb-8`}>
-          Entre em contato comigo!
-        </h2>
-        <form className="space-y-6" onSubmit={handleSubmit}>
-          <input
-            className={`${montserrat.className} w-full px-4 py-3 rounded-md border border-medium-brown bg-white text-dark-brown placeholder-dark-beige focus:ring-2 focus:ring-dark-rose focus:outline-none`}
-            type="text"
-            placeholder="Insira seu nome"
-            name="name"
-            required
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            className={`${montserrat.className} w-full px-4 py-3 rounded-md border border-medium-brown bg-white text-dark-brown placeholder-dark-beige focus:ring-2 focus:ring-dark-rose focus:outline-none`}
-            type="email"
-            placeholder="Insira seu e-mail"
-            name="email"
-            required
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <textarea
-            className={`${montserrat.className} w-full h-32 px-4 py-3 rounded-md border border-medium-brown bg-white text-dark-brown placeholder-dark-beige focus:ring-2 focus:ring-dark-rose focus:outline-none resize-none`}
-            placeholder="Escreva uma mensagem"
-            name="message"
-            required
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-          ></textarea>
-          <input
+
+      {/* Contato */}
+      <div id="contato" className="container p-4 bg-medium-brown text-light-beige px-10 py-16">
+        <h2 className={`text-3xl font-bold mb-6 ${playfairDisplay.className} text-center`}>Contato:</h2>
+        <form onSubmit={handleSubmit} className="max-w-lg mx-auto flex flex-col justify-center "> {/* Adicionado padding */}
+          <div className="mb-4">
+            <label htmlFor="name" className="block text-lg">Nome:</label>
+            <input
+              type="text"
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-lg">Email:</label>
+            <input
+              type="email"
+              id="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded"
+              required
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="message" className="block text-lg">Mensagem:</label>
+            <textarea
+              id="message"
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              className="w-full border border-gray-300 p-2 rounded"
+              required
+            />
+          </div>
+          <button
             type="submit"
-            value="Enviar"
-            className={`${montserrat.className} w-full py-3 rounded-md bg-dark-rose text-white font-semibold cursor-pointer hover:bg-rose transition-colors`}
-          />
+            className="bg-dark-rose text-light-beige py-2 px-4 rounded transition-colors hover:bg-dark-brown"
+          >
+            Enviar
+          </button>
         </form>
       </div>
 
       {/* Footer */}
-      <footer className="bg-dark-brown py-6 mt-12">
-        <div className="container mx-auto text-center">
+      <footer className="bg-dark-brown text-light-beige py-6 text-center">
+        <div className="container">
 
-          <p className="text-light-beige text-sm flex items-center justify-center">
-            Copyright 2024. <FaRegCopyright className="mx-1" /> Todos os direitos reservados.
+          <p>
+            <FaRegCopyright className="inline mr-2" />
+            {new Date().getFullYear()}. Todos os direitos reservados.
           </p>
         </div>
       </footer>
     </section>
-  )
-};
+  );
+}

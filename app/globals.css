@@ -2,19 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-
-
-*{
+* {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  scroll-behavior: smooth;
  
 }
 
+.transition {
+  transition: all 0.3s ease;
+}
 
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
+/* Estilos do Carrossel */
+.carousel {
+  height: 700px; 
+  overflow: hidden; 
+  margin-top: 2%;
+  margin-bottom: 0;
+}
+
+.carousel-slide {
+  padding: 30px; /* Ajuste conforme necessário */
+  height: 100%; /* Para ocupar toda a altura do carrossel */
+  display: flex; /* Para centralizar o conteúdo */
+  align-items: center; /* Centraliza verticalmente */
+  justify-content: center; /* Centraliza horizontalmente */
+}
+
+.slick-slider {
+  display: block !important; /* ou flex, dependendo do seu layout */
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .carousel {
+    height: 500px; /* Altura para desktop */
+  }
+}
+
+@media (max-width: 768px) {
+  .carousel {
+    height: 300px; /* Altura para dispositivos móveis */
   }
 }

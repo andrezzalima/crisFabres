@@ -1,67 +1,71 @@
 import React from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import SwiperCore, { Autoplay, Pagination, Navigation, EffectCoverflow } from 'swiper';
+import { Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/css'; // Importa o CSS básico do Swiper
+import 'swiper/css/navigation'; // Importa o CSS da navegação
+import 'swiper/css/pagination'; // Importa o CSS da paginação
+import 'swiper/css/autoplay'; // Importa o CSS do autoplay
+import 'swiper/swiper-bundle.css';
+import Image from 'next/image';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 
-// Importa os estilos do Swiper
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-import 'swiper/css/effect-coverflow';
-
-// Instala os módulos do Swiper
-SwiperCore.use([Autoplay, Pagination, Navigation, EffectCoverflow]);
 
 const Carousel = () => {
-    return (
-        <>
-            <style jsx>{`
-        .swiper-container {
-          width: 100%;
-          height: 100%;
-        }
+  return (
+    <Swiper
+      modules={[Autoplay, Navigation, Pagination]}
+      slidesPerView={1}
+      autoplay={{
+        delay: 3000,
+        disableOnInteraction: false,
+      }}
+      pagination={{ clickable: true }}
+      click
+      loop={true}
+      navigation={{
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      }}
+      className="carousel overflow-hidden"
+    >
+      <SwiperSlide>
+        <a href="#about">
+        <Image
+          src="/images/banner1.png"
+          alt="Imagem 1"
+          layout="fill"
+          objectFit="cover"
+          quality={75}
+          priority
+        />
+        </a>
+      </SwiperSlide>
+      <SwiperSlide>
+        <a href="https://go.hotmart.com/O94850532U" target='_blank'>
+        <Image
+          src="/images/banner2.png"
+          alt="Imagem 2"
+          layout="fill"
+          objectFit="cover"
+          quality={75}
+          priority
+        />
+        </a>
+      </SwiperSlide>
+      <SwiperSlide>
+        <a href="#ebook">
+        <Image
+          src="/images/banner3.png"
+          alt="Imagem 2"
+          layout="fill"
+          objectFit="cover"
+          quality={75}
+          priority
+        />
+        </a>
+      </SwiperSlide>
+    </Swiper>
 
-        .swiper-slide img {
-          width: 100%;
-          height: auto;
-        }
-      `}</style>
-            <Swiper
-                spaceBetween={20} // Ajuste o espaço entre os slides
-                centeredSlides={true}
-                autoplay={{
-                    delay: 2500,
-                    disableOnInteraction: false,
-                }}
-                pagination={{
-                    clickable: true,
-                }}
-                navigation={true}
-                loop={true}
-                effect="coverflow"
-                coverflowEffect={{
-                    rotate: 30, // Ajuste o ângulo de rotação
-                    stretch: 10, // Espaçamento entre os slides
-                    depth: 200, // Profundidade do efeito 3D
-                    modifier: 1,
-                    slideShadows: true,
-                }}
-            >
-                <SwiperSlide>
-                    <img src="/images/img1.jpg" alt="Imagem 1" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/images/img2.jpg" alt="Imagem 2" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/images/img3.jpg" alt="Imagem 3" />
-                </SwiperSlide>
-                <SwiperSlide>
-                    <img src="/images/img6.jpg" alt="Imagem 6" />
-                </SwiperSlide>
-                {/* Adicione mais SwiperSlides conforme necessário */}
-            </Swiper>
-        </>
-    );
+  );
 };
 
 export default Carousel;
