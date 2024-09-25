@@ -12,7 +12,7 @@ function About() {
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
 
   return (
-    <div id="about" className="flex flex-col md:flex-row items-center md:items-start mb-14 px-4 md:px-0 h-full border rounded-xl border-dark-brown p-10 m-4 md:m-10">
+    <div id="about" className="flex flex-col md:flex-row items-center md:items-start px-4 md:px-0 h-full border rounded-xl border-dark-brown p-10 m-4 md:m-10 bg-light-beige">
       {/* Imagem principal */}
       <div className="w-full md:w-1/2 md:ml-10 flex justify-end">
         <Image
@@ -35,7 +35,7 @@ function About() {
       <h1 id='cris' className={`mb-10 text-center text-2xl lg:text-4xl font-bold text-dark-brown ${playfairDisplay.className}`}>
         Quem é Cristiane Fabres?
       </h1>
-        <div className="bg-rose text-dark-brown w-full md:w-3/4 p-6 rounded-lg shadow-lg mb-4">
+        <div className="bg-dark-beige text-dark-brown w-full md:w-3/4 p-6 rounded-lg shadow-lg mb-4">
           <p className="text-lg">
             Olá! Eu sou Cris Fabres, uma apaixonada por tecnologia, marketing digital e o poder de transformar vidas através do conhecimento. Sou psicóloga de formação, mas foi no universo digital que encontrei minha verdadeira missão: ajudar pessoas a descobrir e alcançar todo o seu potencial no mundo online.
             <br /><br />

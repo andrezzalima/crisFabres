@@ -36,7 +36,7 @@ export default function Home() {
   const [expandedShein, setExpandedShein] = useState(false);
   const [expandedAmazon, setExpandedAmazon] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  
+
 
   // Função de envio de mensagem
   const handleSubmit = async (event) => {
@@ -107,24 +107,15 @@ export default function Home() {
   return (
     <section className={` ${montserrat.className} min-h-screen`}>
       <header>
-        <div className={`fixed top-0 left-0 z-10 w-full bg-rose sm:min-h-16 min-h-14 flex items-center ${isMobile ? "justify-end" : "justify-center"}  text-light-beige`}>
-
+        <div className="fixed top-0 left-0 z-10 w-full bg-medium-brown min-h-14 flex items-center justify-center text-light-beige">
           <div className="flex flex-col sm:flex-row sm:px-10 px-5">
-            <button className="sm:hidden block z-50" onClick={toggleMenu}>
-              <IoMenuOutline className={`text-3xl sm:text-6xl ${isMenuOpen ? "text-light-beige" : "text-dark-brown"}`} />
-            </button>
-
-            <nav className={`${isMenuOpen && window.innerWidth < 1024
-              ? "flex w-full h-screen fixed top-0 left-0 gap-5 bg-dark-beige text-dark-brown flex-col justify-center items-center z-20"
-              : "hidden sm:flex flex-col sm:flex-row sm:justify-center sm:items-center gap-20 text-sm uppercase z-20"
-              }`}>
+            <nav className="flex sm:justify-center sm:items-center gap-4 md:gap-20 text-sm uppercase z-20">
               {["Sobre mim", "Cursos", "Produtos", "Contato"].map((item, index) => {
-                const ids = ["about", "projects", "courses", "contact"];
+                const ids = ["about", "courses", "products", "contact"];
                 return (
                   <a
                     key={index}
                     href={`#${ids[index]}`}
-                    onClick={toggleMenu}
                     className="hover:text-dark-brown transition-all duration-300"
                   >
                     {item}
@@ -136,11 +127,12 @@ export default function Home() {
         </div>
       </header>
 
+
       {/* carrossel */}
       <Carousel />
 
       {/* div social media */}
-      <div className="flex justify-evenly mb-4 space-x-6 bg-dark-brown p-10 text-rose">
+      <div className="flex justify-evenly mb-4 space-x-6 p-10 text-medium-brown">
         {socialLinks.map((link, index) => (
           <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-dark-rose transition-all duration-300 ">
             {link.icon}
@@ -152,7 +144,10 @@ export default function Home() {
       <About />
 
       {/* div e-books e curso */}
-      <div className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-24">
+      <h2 className={`text-2xl md:text-4xl mt-16 font-bold ${playfairDisplay.className} text-center`}>
+           Cursos:
+          </h2>
+      <div id="courses" className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-10">
         {/* Div 1 - Curso */}
         <div id="curso" className="bg-dark-brown text-light-beige p-6 md:p-12 flex flex-col items-center min-h-full w-full md:w-1/2">
           <h2 className={`text-3xl font-bold mb-6 text-center`}>DMA Dólar <br /> Master Academy</h2>
@@ -163,14 +158,15 @@ export default function Home() {
             href="https://go.hotmart.com/O94850532U"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-dark-rose text-light-beige py-2 px-4 rounded transition-colors hover:bg-light-brown"
+            className="bg-dark-beige text-black py-2 px-4 rounded transition-colors hover:bg-medium-brown hover:text-light-beige"
           >
             Conheça o Curso
           </a>
         </div>
 
         {/* Div 2 - Ebook */}
-        <div className="flex flex-col items-center justify-between h-full w-full md:w-1/2 bg-rose">
+        <div className="flex flex-col items-center justify-between h-full w-full md:w-1/2 bg-light-beige">
+        
           <h2 className={`text-lg font-semibold text-center mt-8 md:mt-12 md:text-5xl md:mb-4`}>
             Clique aqui para fazer <br /> o download do e-book:
           </h2>
@@ -191,16 +187,16 @@ export default function Home() {
       </div>
 
       {/* Produtos */}
-      <div className="container mb-14">
+      <div id='products' className="container mb-14">
         {/* Introdução aos Produtos */}
-        <div className="text-center mb-8 p-10 w-screen bg-medium-brown text-light-beige">
-          <h2 className={`text-2xl md:text-4xl font-bold mb-10 ${playfairDisplay.className} text-center`}>
+        <div className="text-center p-10 w-screen bg-medium-brown text-light-beige">
+          <h2 className={`text-2xl md:text-4xl font-bold ${playfairDisplay.className} text-center`}>
             Produtos que eu indico:
-          </h2>
-          <p className="text-base md:text-lg">
+          </h2>         
+        </div>
+        <p className="text-base md:text-lg p-10 text-center ">
             Todos os produtos abaixo foram cuidadosamente escolhidos por mim e são opções que acredito que irão melhorar sua experiência no dia a dia. Ao clicar em qualquer um dos links, você será redirecionado para uma página externa. Aproveite as recomendações e boas compras!
           </p>
-        </div>
         {/* Seção de Produtos - Shein */}
         <div className="text-dark-brown mb-14">
           <h3 className={`text-3xl font-semibold mb-8 text-center`}>
@@ -275,7 +271,7 @@ export default function Home() {
       </div>
 
       {/* Contato */}
-      <div id="contato" className="container p-4 bg-medium-brown text-light-beige px-10 py-16">
+      <div id="contact" className="container p-4 bg-medium-brown text-light-beige px-10 py-16">
         <h2 className={`text-3xl font-bold mb-6 ${playfairDisplay.className} text-center`}>Contato:</h2>
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto flex flex-col justify-center "> {/* Adicionado padding */}
           <div className="mb-4">
@@ -312,7 +308,7 @@ export default function Home() {
           </div>
           <button
             type="submit"
-            className="bg-dark-rose text-light-beige py-2 px-4 rounded transition-colors hover:bg-dark-brown"
+            className="bg-light-beige text-dark-brown font-bold py-2 px-4 rounded transition-colors hover:text-light-beige hover:bg-dark-brown"
           >
             Enviar
           </button>
