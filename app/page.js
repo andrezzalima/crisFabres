@@ -270,7 +270,7 @@ export default function Home() {
       </div>
 
       {/* Contato */}
-      <div id="contact" className="container p-4 bg-medium-brown text-light-beige px-10 py-16">
+      <div id="contact" className="container p-4 bg-medium-brown text-dark-brown px-10 py-16">
         <h2 className={`text-3xl font-bold mb-6 ${playfairDisplay.className} text-center`}>Contato:</h2>
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto flex flex-col justify-center "> {/* Adicionado padding */}
           <div className="mb-4">
