@@ -147,7 +147,7 @@ export default function Home() {
       <h2 id="courses" className={`text-2xl md:text-4xl mt-16 font-bold ${playfairDisplay.className} text-center`}>
            Cursos:
           </h2>
-      <div  className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-10">
+      <div  className=" px-10  flex flex-col md:flex-row gap-4 bg-white py-10">
         {/* Div 1 - Curso */}
         <div  className="flex flex-col items-center justify-end h-full w-full md:w-1/2" >
           <a id='ebook'
@@ -265,7 +265,7 @@ export default function Home() {
       </div>
 
       {/* Contato */}
-      <div id="contact" className="container p-4 bg-medium-brown text-dark-brown px-10 py-16">
+      <div id="contact" className="container p-4 bg-medium-brown text-light-beige px-10 py-16">
         <h2 className={`text-3xl font-bold mb-6 ${playfairDisplay.className} text-center`}>Contato:</h2>
         <form onSubmit={handleSubmit} className="max-w-lg mx-auto flex flex-col justify-center "> {/* Adicionado padding */}
           <div className="mb-4">
