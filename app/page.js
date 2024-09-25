@@ -171,7 +171,7 @@ export default function Home() {
             className="transform transition-transform duration-300 hover:scale-105 mt-4"
           >
             <img
-              src="/images/DMACris.png"
+              src="/images/DMACrisf.png"
               alt="DMA-Cris"
               className="w-full max-w-md h-auto shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 "
               style={{ objectFit: 'cover' }}
