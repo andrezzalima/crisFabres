@@ -149,28 +149,23 @@ export default function Home() {
           </h2>
       <div  className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-10">
         {/* Div 1 - Curso */}
-        <div id="curso" className="bg-dark-brown text-light-beige p-6 md:p-12 flex flex-col items-center min-h-full w-full md:w-1/2">
-          <h2 className={`text-3xl font-bold mb-6 text-center`}>DMA Dólar <br /> Master Academy</h2>
-          <p className="text-lg text-center mb-6">
-            Essa é a sua oportunidade de começar a ganhar dinheiro com a internet graças ao método que mais de 23 mil alunos aplicaram e mudaram de vida!
-          </p>
-          <a
-            href="https://go.hotmart.com/O94850532U"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="bg-dark-beige text-black py-2 px-4 rounded transition-colors hover:bg-medium-brown hover:text-light-beige"
+        <div  className="flex flex-col items-center justify-end h-full w-full md:w-1/2" >
+          <a id='ebook'
+            href="https://go.hotmart.com/O94850532U" target='_blank'          
+            className="transform transition-transform duration-300 hover:scale-105 mt-4"
           >
-            Conheça o Curso
+            <img
+              src="/images/DMA-curso.png"
+              alt="DMA-Curso"
+              className="w-full max-w-md h-auto shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 "
+              style={{ objectFit: 'cover' }}
+            />
           </a>
-        </div>
+        </div>                 
 
         {/* Div 2 - Ebook */}
-        <div id='ebook' className="flex flex-col items-center justify-between h-full w-full md:w-1/2 bg-light-beige">
-        
-          <h2 className={`text-lg font-semibold text-center mt-8 md:mt-12 md:text-5xl md:mb-4`}>
-            Clique aqui para fazer <br /> o download do e-book:
-          </h2>
-          <a
+        <div  className="flex flex-col items-center justify-start h-full w-full md:w-1/2" >
+          <a id='ebook'
             href="DMA-mulherestecnologia.pdf"
             download            
             className="transform transition-transform duration-300 hover:scale-105 mt-4"
@@ -178,7 +173,7 @@ export default function Home() {
             <img
               src="/images/DMACris.png"
               alt="DMA-Cris"
-              className="w-full max-w-md h-auto shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 mb-4"
+              className="w-full max-w-md h-auto shadow-lg rounded-lg hover:shadow-2xl transition-shadow duration-300 "
               style={{ objectFit: 'cover' }}
             />
           </a>
