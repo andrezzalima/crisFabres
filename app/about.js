@@ -12,7 +12,7 @@ function About() {
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
 
   return (
-    <div id="about" className="flex flex-col md:flex-row items-center md:items-start px-4 md:px-0 h-full border rounded-xl border-dark-brown p-10 m-4 md:m-10 bg-light-beige">
+    <div  className="flex flex-col md:flex-row items-center md:items-start px-4 md:px-0 h-full border rounded-xl border-dark-brown p-10 m-4 md:m-10 bg-light-beige">
       {/* Imagem principal */}
       <div className="w-full md:w-1/2 md:ml-10 flex justify-end">
         <Image

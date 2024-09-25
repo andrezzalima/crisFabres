@@ -132,7 +132,7 @@ export default function Home() {
       <Carousel />
 
       {/* div social media */}
-      <div className="flex justify-evenly mb-4 space-x-6 p-10 text-medium-brown">
+      <div id="about" className="flex justify-evenly mb-4 space-x-6 p-10 text-medium-brown">
         {socialLinks.map((link, index) => (
           <a key={index} href={link.url} target="_blank" rel="noopener noreferrer" className="hover:text-dark-rose transition-all duration-300 ">
             {link.icon}
@@ -144,10 +144,10 @@ export default function Home() {
       <About />
 
       {/* div e-books e curso */}
-      <h2 className={`text-2xl md:text-4xl mt-16 font-bold ${playfairDisplay.className} text-center`}>
+      <h2 id="courses" className={`text-2xl md:text-4xl mt-16 font-bold ${playfairDisplay.className} text-center`}>
            Cursos:
           </h2>
-      <div id="courses" className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-10">
+      <div  className=" px-4  flex flex-col md:flex-row gap-4 bg-white py-10">
         {/* Div 1 - Curso */}
         <div id="curso" className="bg-dark-brown text-light-beige p-6 md:p-12 flex flex-col items-center min-h-full w-full md:w-1/2">
           <h2 className={`text-3xl font-bold mb-6 text-center`}>DMA Dólar <br /> Master Academy</h2>
@@ -165,15 +165,14 @@ export default function Home() {
         </div>
 
         {/* Div 2 - Ebook */}
-        <div className="flex flex-col items-center justify-between h-full w-full md:w-1/2 bg-light-beige">
+        <div id='ebook' className="flex flex-col items-center justify-between h-full w-full md:w-1/2 bg-light-beige">
         
           <h2 className={`text-lg font-semibold text-center mt-8 md:mt-12 md:text-5xl md:mb-4`}>
             Clique aqui para fazer <br /> o download do e-book:
           </h2>
           <a
             href="DMA-mulherestecnologia.pdf"
-            download
-            id='ebook'
+            download            
             className="transform transition-transform duration-300 hover:scale-105 mt-4"
           >
             <img
